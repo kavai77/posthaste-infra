@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Text NER Search</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        label { font-weight: bold; display: block; margin-bottom: 8px; }
+        textarea { width: 100%; height: 120px; margin-bottom: 20px; }
+        button { display: block; margin: 0 auto 20px auto; padding: 10px 30px; }
+        pre { background: #f4f4f4; padding: 16px; border-radius: 6px; }
+        #result { margin-top: 30px; }
+    </style>
+</head>
+<body>
+<label for="emailText">Email Text</label>
+<textarea id="emailText" placeholder="Enter your email text here...">Please create a shipment to 1101 Budapest, Lajos út 12/A 2/4, Hungary, with Fedex International Economy. The shipment weight is 2.5 kg, and the dimensions are 30 cm x 20 cm x 10 cm. The shipment contains a laptop and a charger. The sender is John Doe, and the recipient is Jane Smith. The shipment is scheduled for delivery on 2025-08-15.</textarea>
+<button id="searchBtn">Search</button>
+<div id="result"></div>
+
+<script>
+    document.getElementById('searchBtn').onclick = async function() {
+        const text = document.getElementById('emailText').value;
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = 'Loading...';
+        try {
+            const response = await fetch('http://91.99.113.6/ner/extract/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text })
+            });
+            if (!response.ok) {
+                throw new Error('HTTP error ' + response.status);
+            }
+            const data = await response.json();
+            resultDiv.innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+        } catch (err) {
+            resultDiv.innerHTML = '<span style="color:red;">Error: ' + err.message + '</span>';
+        }
+    };
+</script>
+</body>
+</html>

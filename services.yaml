@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: posthaste-ner
+  name: posthaste-ner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: posthaste-ner
+  template:
+    metadata:
+      labels:
+        app: posthaste-ner
+    spec:
+      containers:
+        - image: ghcr.io/kavai77/posthaste-ner@sha256:24d2a5a4790642dba2c06a122c6e8ce430b0627d01de761cfbb599e0029dfd13
+          name: posthaste-ner
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: posthaste-ner
+  name: posthaste-ner
+spec:
+  ports:
+    - port: 8000
+      nodePort: 30000
+      targetPort: 8000
+  selector:
+    app: posthaste-ner
+  type: NodePort
