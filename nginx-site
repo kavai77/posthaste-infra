@@ -2,10 +2,6 @@ server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
-        root /home/himadri/posthaste-infra/html;
-
-        index index.html;
-
         server_name www.posthaste.pro;
 
         limit_req zone=ip burst=12 delay=8;
@@ -13,7 +9,8 @@ server {
 
         location / {
             try_files $uri $uri/ =404;
-            disable_symlinks off;
+            root /var/www/html;
+            index index.html;
         }
         location /.git {
            deny all;
