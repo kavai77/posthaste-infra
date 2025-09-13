@@ -37,9 +37,9 @@ source .bash_aliases
 kubectl apply -f posthaste-infra/services.yaml
 
 sudo rm -rf /var/www/html
-sudo ln -s posthaste-infra/html /var/www/
+sudo ln -s `pwd`/posthaste-infra/html /var/www/
 
-sudo rm -rf /etc/nginx/sites-enabled/default
-sudo ln -s posthaste-infra/nginx-site /etc/nginx/sites-enabled
+sudo rm -f /etc/nginx/sites-enabled/default
+sudo ln -s `pwd`/posthaste-infra/nginx-site /etc/nginx/sites-enabled
 sudo systemctl reload nginx
 

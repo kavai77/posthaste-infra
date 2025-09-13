@@ -3,19 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Email Text NER Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        label { font-weight: bold; display: block; margin-bottom: 8px; }
-        textarea { width: 100%; height: 120px; margin-bottom: 20px; }
-        button { display: block; margin: 0 auto 20px auto; padding: 10px 30px; }
-        pre { background: #f4f4f4; padding: 16px; border-radius: 6px; }
-        #result { margin-top: 30px; }
+        body { font-family: Arial, sans-serif; margin: 4vw; }
+        label { font-weight: bold; display: block; margin-bottom: 0.5rem; }
+        textarea { width: 100%; height: 8rem; margin-bottom: 1.5rem; font-size: 1rem; }
+        button { display: block; margin: 0 auto 1.5rem auto; padding: 0.7rem 2rem; font-size: 1rem; }
+        pre { background: #f4f4f4; padding: 1rem; border-radius: 0.5rem; font-size: 0.95rem; word-break: break-word; }
+        #result { margin-top: 2rem; }
+        @media (max-width: 600px) {
+            body { margin: 2vw; }
+            textarea { height: 6rem; font-size: 0.95rem; }
+            button { padding: 0.6rem 1.2rem; font-size: 0.95rem; }
+            pre { font-size: 0.9rem; }
+        }
     </style>
 </head>
 <body>
 <label for="emailText">Email Text</label>
 <textarea id="emailText" placeholder="Enter your email text here...">Please create a shipment to 1101 Budapest, Lajos út 12/A 2/4, Hungary, with Fedex International Economy. The shipment weight is 2.5 kg, and the dimensions are 30 cm x 20 cm x 10 cm. The shipment contains a laptop and a charger. The sender is John Doe, and the recipient is Jane Smith. The shipment is scheduled for delivery on 2025-08-15.</textarea>
-<button id="searchBtn">Search</button>
+<button id="searchBtn">Analyse</button>
 <div id="result"></div>
 
 <script>
@@ -24,7 +31,7 @@
         const resultDiv = document.getElementById('result');
         resultDiv.innerHTML = 'Loading...';
         try {
-            const response = await fetch('http://91.99.113.6/ner/extract/', {
+            const response = await fetch('/ner/extract/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text })
