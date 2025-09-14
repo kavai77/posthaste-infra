@@ -8,6 +8,7 @@ mkdir -p ~/.kube
 chmod 0700 ~/.kube
 
 echo alias kubectl=\"microk8s kubectl\" >> .bash_aliases
+echo alias k=\"microk8s kubectl\" >> .bash_aliases
 source .bash_aliases
 
 kubectl apply -f posthaste-infra/services.yaml
@@ -19,12 +20,11 @@ sudo systemctl enable nginx
 
 sudo apt-get -y install jq
 
-kubectl apply -f posthaste-infra/services.yaml
-
+sudo chmod o+rx ~
 sudo rm -rf /var/www/html
-sudo ln -s `pwd`/posthaste-infra/html /var/www/
+sudo ln -s ~/posthaste-infra/html /var/www/
 
 sudo rm -f /etc/nginx/sites-enabled/default
-sudo ln -s `pwd`/posthaste-infra/nginx-site /etc/nginx/sites-enabled
+sudo ln -s ~/posthaste-infra/nginx-site /etc/nginx/sites-enabled
 sudo systemctl reload nginx
 

@@ -21,6 +21,6 @@ server {
         }
 
         location /ner/ {
-           proxy_pass http://192.168.27.1;
+           proxy_pass http://192.168.27.1/;
         }
 }
