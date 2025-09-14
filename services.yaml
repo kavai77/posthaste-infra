@@ -25,10 +25,11 @@ metadata:
     app: posthaste-ner
   name: posthaste-ner
 spec:
+  externalIPs:
+    - 192.168.27.1
   ports:
-    - port: 8000
-      nodePort: 30000
+    - port: 80
       targetPort: 8000
   selector:
     app: posthaste-ner
-  type: NodePort
+  type: ClusterIP

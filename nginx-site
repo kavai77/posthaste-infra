@@ -4,7 +4,7 @@ server {
 
         server_name www.posthaste.pro;
 
-        limit_req zone=ip burst=12 delay=8;
+        limit_req zone=ip:10m burst=12 delay=8;
         limit_conn addr 10;
 
         location / {
@@ -21,6 +21,6 @@ server {
         }
 
         location /ner/ {
-           proxy_pass http://192.168.200.200:30000/;
+           proxy_pass http://192.168.27.1;
         }
 }
