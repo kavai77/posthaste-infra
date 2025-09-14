@@ -1,11 +1,15 @@
 server {
         listen 80 default_server;
         listen [::]:80 default_server;
+        server_name www.posthaste.pro;
+        return 301 https://www.posthaste.pro$request_uri;
+}
+
+server {
+        listen 443 ssl default_server;
+        listen [::]:443 ssl default_server;
 
         server_name www.posthaste.pro;
-
-        limit_req zone=ip:10m burst=12 delay=8;
-        limit_conn addr 10;
 
         location / {
             try_files $uri $uri/ =404;
@@ -16,11 +20,11 @@ server {
            deny all;
            return 404;
         }
-        location /.well-known {
-           root /var/www/html;
-        }
 
         location /ner/ {
            proxy_pass http://192.168.27.1/;
         }
+
+        ssl_certificate /etc/letsencrypt/live/www.posthaste.pro/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/www.posthaste.pro/privkey.pem;
 }

@@ -1,6 +1,10 @@
 sudo apt-get update
 sudo apt-get -y install snapd
 
+# Install CertBot
+sudo apt-get -y install certbot
+sudo certbot certonly -d www.posthaste.pro
+
 # Install MicroK8s
 sudo snap install microk8s --classic --channel=1.33
 sudo usermod -a -G microk8s $USER
@@ -27,4 +31,3 @@ sudo ln -s ~/posthaste-infra/html /var/www/
 sudo rm -f /etc/nginx/sites-enabled/default
 sudo ln -s ~/posthaste-infra/nginx-site /etc/nginx/sites-enabled
 sudo systemctl reload nginx
-
