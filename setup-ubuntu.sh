@@ -3,7 +3,7 @@ sudo apt-get -y install snapd
 
 # Install CertBot
 sudo apt-get -y install certbot
-sudo certbot certonly -d www.posthaste.pro
+sudo certbot certonly --standalone -d www.posthaste.pro
 
 # Install MicroK8s
 sudo snap install microk8s --classic --channel=1.33
