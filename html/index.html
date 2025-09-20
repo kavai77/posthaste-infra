@@ -94,7 +94,7 @@
             $('#loading').show();
             var text = $('#emailText').val();
             $.ajax({
-                url: 'http://localhost:8000/extract',
+                url: '/ner/extract',
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({ text: text }),
