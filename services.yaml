@@ -15,7 +15,7 @@ spec:
         app: posthaste-ner
     spec:
       containers:
-        - image: ghcr.io/kavai77/posthaste-ner@sha256:24d2a5a4790642dba2c06a122c6e8ce430b0627d01de761cfbb599e0029dfd13
+        - image: ghcr.io/kavai77/posthaste-ner@sha256:457428ac0cf82652c21e4926c9daaec68dbd3968821743854c9b4f4368091caa
           name: posthaste-ner
 ---
 apiVersion: v1
